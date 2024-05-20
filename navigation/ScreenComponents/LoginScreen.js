@@ -2,16 +2,15 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, Alert, ActivityIndicator } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import jwtDecode from 'jwt-decode';
 
 const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async () => {
     // Basic input validation
-    if (!email || !password) {
+    if (!username || !password) {
       Alert.alert('Error', 'Please fill in all fields');
       return;
     }
@@ -19,24 +18,24 @@ const LoginScreen = ({ navigation }) => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post('https://etracker-backend.onrender.com/login', {
-        email,
+      const response = await axios.post('http://10.0.2.2:3000/login', {
+        username,
         password,
       });
 
-      const { token } = response.data;
-      const decoded = jwtDecode(token);
-      console.log(decoded); // Token payload (optional)
+      const token = response.data.token;
 
-      await AsyncStorage.setItem('token', token); // Consider using a more secure storage
+      await AsyncStorage.setItem('token', token);
       setIsLoading(false);
-      navigation.navigate('MainDrawer'); 
+      navigation.navigate('MainDrawer');
     } catch (error) {
       setIsLoading(false);
       if (error.response && error.response.data) {
         Alert.alert('Error', error.response.data.message || 'Login failed');
+        console.log(error.response.data);
       } else {
         Alert.alert('Error', 'An error occurred during login');
+        console.log(error);
       }
     }
   };
@@ -45,9 +44,9 @@ const LoginScreen = ({ navigation }) => {
     <View style={styles.container}>
       <TextInput
         style={styles.textInput}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
+        placeholder="Username"
+        value={username}
+        onChangeText={setUsername}
         autoCapitalize="none"
       />
       <TextInput
@@ -58,10 +57,9 @@ const LoginScreen = ({ navigation }) => {
         onChangeText={setPassword}
       />
       <Button title="Login" onPress={handleLogin} disabled={isLoading} />
-
       {isLoading && (
         <View style={styles.loadingIndicator}>
-          <ActivityIndicator size="large" color="#0000ff" /> 
+          <ActivityIndicator size="large" color="#0000ff" />
         </View>
       )}
     </View>
@@ -83,7 +81,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   loadingIndicator: {
-    position: 'absolute', 
+    position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
