@@ -23,7 +23,7 @@ const EducationScreen = () => {
       <MyComponent 
         title="Naga College Foundation Inc."
         content="Bachelor of Science in Computer Science 2022 - Present"
-        imageSource={require('../../assets/college.jpg')} 
+        imageSource={require('../../public/ncf.png')} 
       />
       <MyComponent 
         title="Bicol College of Applied Science and Technology"
