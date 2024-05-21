@@ -1,74 +1,87 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { Avatar, Card, IconButton, Text, Provider as PaperProvider } from 'react-native-paper';
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  SectionList,
+  Image,
+  ImageBackground,
+} from 'react-native';
 
-const SkillScreen = () => {
-  return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Card style={styles.card}>
-        <Card.Title
-          title="React.js"
-          subtitle="Frontend Framework"
-          left={(props) => <Avatar.Icon {...props} icon="react" />}
-          right={(props) => <IconButton {...props} icon="dots-vertical" onPress={() => {}} />}
-        />
-        <Card.Content>
-          <Text style={styles.skillText}>A JavaScript library for building user interfaces.</Text>
-        </Card.Content>
-      </Card>
-      <Card style={styles.card}>
-        <Card.Title
-          title="React Native"
-          subtitle="Mobile Framework"
-          left={(props) => <Avatar.Icon {...props} icon="cellphone" />}
-          right={(props) => <IconButton {...props} icon="dots-vertical" onPress={() => {}} />}
-        />
-        <Card.Content>
-          <Text style={styles.skillText}>A framework for building native apps using React.</Text>
-        </Card.Content>
-      </Card>
-      <Card style={styles.card}>
-        <Card.Title
-          title="Node.js"
-          subtitle="Backend Runtime"
-          left={(props) => <Avatar.Icon {...props} icon="language-javascript" />}
-          right={(props) => <IconButton {...props} icon="dots-vertical" onPress={() => {}} />}
-        />
-        <Card.Content>
-          <Text style={styles.skillText}>A JavaScript runtime built on Chrome's V8 JavaScript engine.</Text>
-        </Card.Content>
-      </Card>
-      <Card style={styles.card}>
-        <Card.Title
-          title="Java"
-          subtitle="Programming Language"
-          left={(props) => <Avatar.Icon {...props} icon="language-java" />}
-          right={(props) => <IconButton {...props} icon="dots-vertical" onPress={() => {}} />}
-        />
-        <Card.Content>
-          <Text style={styles.skillText}>A high-level, class-based, object-oriented programming language.</Text>
-        </Card.Content>
-      </Card>
-    </ScrollView>
-  );
+const image = { uri: 'https://i.pinimg.com/564x/21/88/31/2188313700383fbdef4f3aa9c88ef6ac.jpg' };
+
+const DATA = [
+  {
+    title: 'PYTHON',
+    data: ['', '', ''],
+    image: require('../../public/python-logo.png'),
+  },
+  {
+    title: 'PHP',
+    data: ['', '', ''],
+    image: require('../../public/php-logo.png'),
+  },
+  {
+    title: 'NODEJS',
+    data: ['', '', ''],
+    image: require('../../public/nodejs.png'),
+  },
+  {
+    title: 'MYSQL',
+    data: ['', ''],
+    image: require('../../public/logo-mysql.png'),
+  },
+  {
+    title: 'JAVASCRIPT',
+    data: ['', ''],
+    image: require('../../public/javascript.png'),
+  },
+];
+const Skills = () => {
+  
+  return(
+    <ImageBackground source={image} style={styles.container}>
+    <SafeAreaView style={styles.container}>
+    <SectionList
+      sections={DATA}
+      keyExtractor={(item, index) => item + index}
+      renderItem={({item}) => (
+        <View style={styles.item}>
+          <Text style={styles.title}>{item}</Text>
+        </View>
+      )}
+      renderSectionHeader={({section: {title,image}}) => (
+        <View>
+          <Text style={styles.header}>{title}</Text>
+          <Image source={image} style={styles.image} />
+        </View>
+      )}
+    />
+  </SafeAreaView>
+  </ImageBackground>
+  );  
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
-    justifyContent: 'center',
     padding: 16,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: 'transparent',
+    width: 400,
   },
-  card: {
-    marginVertical: 8,
+  header: {
+    fontSize: 20,
+    color: 'black',
+    fontWeight: 'bold',
+    marginTop: 20,
   },
-  skillText: {
-    fontSize: 16,
-    marginVertical: 4,
-    fontFamily: 'Poppins-Regular', // Ensure this font is loaded
+  image: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    marginBottom: 16,
+    alignSelf: 'center',
   },
 });
 
-
-export default SkillScreen;
+export default Skills;

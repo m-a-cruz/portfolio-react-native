@@ -1,61 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
-import { TypingAnimation } from 'react-native-typing-animation';
+import { View, Text, StyleSheet, Image, ScrollView, ImageBackground } from 'react-native';
 import { Avatar } from 'react-native-paper';
 //import Social from './Social';
 
+const image = { uri: 'https://i.pinimg.com/564x/21/88/31/2188313700383fbdef4f3aa9c88ef6ac.jpg' };
+
+
 const HomeScreen = () => {
-    const [typingText, setTypingText] = useState('');
-  const textToType = ['Web Developer', 'Software Developer'];
-  const typingSpeed = 60; // Milliseconds per character
-  const backDelay = 700; // Delay before starting to type the next text
-  const backSpeed = 40; // Speed of deleting each character
+  
+  const avatar1 = {uri: 'https://i.pinimg.com/736x/72/e5/30/72e53053691540023c22fd736992fd87.jpg'}
 
-  useEffect(() => {
-    let currentIndex = 0;
-    let currentTextIndex = 0;
-    let isDeleting = false;
-
-    const type = () => {
-      if (!isDeleting && currentTextIndex < textToType[currentIndex].length) {
-        setTypingText(prev => prev + textToType[currentIndex].charAt(currentTextIndex));
-        currentTextIndex++;
-        setTimeout(type, typingSpeed);
-      } else if (isDeleting && currentTextIndex > 0) {
-        setTypingText(prev => prev.slice(0, -1));
-        currentTextIndex--;
-        setTimeout(type, backSpeed);
-      } else if (!isDeleting && currentTextIndex === textToType[currentIndex].length) {
-        isDeleting = true;
-        setTimeout(type, backDelay);
-      } else if (isDeleting && currentTextIndex === 0) {
-        isDeleting = false;
-        currentIndex = (currentIndex + 1) % textToType.length;
-        setTimeout(type, typingSpeed);
-      }
-    };
-
-    type();
-  }, []);
     return (
+        <ImageBackground source={image} style={styles.container}>
         <ScrollView contentContainerStyle={styles.container}>
-            {/* <View style={styles.socialContainer}>
-                <Social />
-            </View> */}
             <View style={styles.contentContainer}>
                 <View style={styles.content}>
                     <View style={styles.textContainer}>
-                        <Text style={styles.title}>Jesreel A.</Text>
-                        <Text style={styles.subtitle}>
-                            ------------- <Text>{typingText}</Text>
-                        </Text>
+                        <Text style={styles.title}>Ma. Ana De La Cruz</Text>
                         <Text style={styles.description}>
-                            🚀 Aspiring Web /Software developer | Crafting digital magic with Mysql, React, Laravel, C/C++, C#, Java. Let's build the future together! ✨
+                        Programmer: A machine that turns coffee into code.”
                         </Text>
                     </View>
                     <View style={styles.avatarContainer}>
                         <Avatar.Image
-                            source={require('../../assets/portfolio.jpg')} // Adjust the path as needed
+                            source={avatar1} // Adjust the path as needed
                             size={250}
                             style={styles.avatar}
                         />
@@ -63,13 +31,14 @@ const HomeScreen = () => {
                 </View>
             </View>
         </ScrollView>
+        </ImageBackground>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: 'transparent',
         padding: 16,
     },
     socialContainer: {
@@ -93,9 +62,11 @@ const styles = StyleSheet.create({
         marginLeft: 60,
     },
     title: {
-        fontSize: 28,
+        fontSize: 40 ,
         letterSpacing: 2,
-        fontFamily: 'Poppins-Bold', // Ensure this font is loaded
+        // fontFamily: 'Poppins-Bold', // Ensure this font is loaded
+        fontWeight: '600',
+        textAlign: 'center',
     },
     subtitle: {
         fontSize: 12,
@@ -107,6 +78,7 @@ const styles = StyleSheet.create({
         letterSpacing: 2,
         fontFamily: 'Poppins-Regular', // Ensure this font is loaded
         color: 'gray',
+        marginTop: 10,
         
     },
     avatarContainer: {

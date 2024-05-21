@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import MainDrawer from './navigation/MainDrawer'; // Adjust the path as necessary
 import LoginScreen from './navigation/ScreenComponents/LoginScreen';
+import { ImageBackground } from 'react-native';
 
 const Stack = createStackNavigator();
 

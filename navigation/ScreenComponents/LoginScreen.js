@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet, Alert, ActivityIndicator } from 'react-native';
+import { View, TextInput, Button, StyleSheet, Alert, ActivityIndicator, ImageBackground } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+const image = { uri: 'https://i.pinimg.com/564x/21/88/31/2188313700383fbdef4f3aa9c88ef6ac.jpg' };
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -41,6 +42,7 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
+    <ImageBackground source={image} style={styles.container}>
     <View style={styles.container}>
       <TextInput
         style={styles.textInput}
@@ -56,13 +58,14 @@ const LoginScreen = ({ navigation }) => {
         value={password}
         onChangeText={setPassword}
       />
-      <Button title="Login" onPress={handleLogin} disabled={isLoading} />
+      <Button title="Login" color={'grey'} onPress={handleLogin} disabled={isLoading} />
       {isLoading && (
         <View style={styles.loadingIndicator}>
-          <ActivityIndicator size="large" color="#0000ff" />
+          <ActivityIndicator size="large" color="black" />
         </View>
       )}
     </View>
+    </ImageBackground>
   );
 };
 
@@ -71,11 +74,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 16,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: 'transparent',
   },
   textInput: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: 'black',
     borderWidth: 1,
     marginBottom: 12,
     paddingHorizontal: 8,

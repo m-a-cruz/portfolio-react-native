@@ -1,9 +1,12 @@
 import React from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, ImageBackground } from 'react-native';
+
+const image = { uri: 'https://i.pinimg.com/564x/21/88/31/2188313700383fbdef4f3aa9c88ef6ac.jpg' };
 
 const ContactScreen = () => {
   return (
-    <View style={styles.container}>
+    <ImageBackground source={image} style={styles.container}>
+    <View style={styles.container1}>
       <Text style={styles.header}>
         Contact me!
       </Text>
@@ -33,6 +36,7 @@ const ContactScreen = () => {
         </View>
       </View>
     </View>
+    </ImageBackground>
   );
 };
 
@@ -41,8 +45,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 16,
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
+  },
+  container1: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   header: {
     fontSize: 30,
@@ -55,7 +62,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   card: {
-    width: '90%',
+    width: 300,
     padding: 20,
     borderRadius: 10,
     backgroundColor: '#fff',

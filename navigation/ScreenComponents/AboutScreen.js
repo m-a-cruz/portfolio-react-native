@@ -1,32 +1,41 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image, ImageBackground } from 'react-native';
 import { Avatar, Card, Paragraph } from 'react-native-paper';
 
+const image = { uri: 'https://i.pinimg.com/564x/21/88/31/2188313700383fbdef4f3aa9c88ef6ac.jpg' };
 const AboutScreen = () => {
+  
+  const avatar1 = {uri: 'https://i.pinimg.com/736x/72/e5/30/72e53053691540023c22fd736992fd87.jpg'}
+
   return (
+    <ImageBackground source={image} style={styles.container}>
     <ScrollView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>About Me</Text>
         <Text style={styles.headerSubtitle}>My Introduction</Text>
       </View>
       <View style={styles.content}>
-        <Image source={require('../../assets/portfolio.jpg')} style={styles.avatar} />
+        <Image source={avatar1} style={styles.avatar} />
         <Card style={styles.card}>
           <Card.Content>
             <Paragraph style={styles.paragraph}>
-              🚀I am Jesreel Amorganda, a 3rd Year Student of Naga College Foundation taking the course of Bachelor Science of Computer Science. Enthusiastic student with a strong dedication to academic excellence and personal growth. Eager to explore the intersections of knowledge and creativity, I am passionate about building new things that are connected to technology. Through my studies and extracurricular experiences, I aim to contribute my unique perspective and skills to make a positive impact on the world. ✨
+            I am a student from Naga College Foundation Inc. taking the course 
+        Bachelor of Science in Computer Science. I am currently in my sophomore 
+        year having basic knowledge with Python, C, C++, Larave, Postman,
+        JavaScript, CSS, and HTML programming languages.
             </Paragraph>
           </Card.Content>
         </Card>
       </View>
     </ScrollView>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
   },
   header: {
     textAlign: 'center',
@@ -59,13 +68,15 @@ const styles = StyleSheet.create({
   card: {
     maxWidth: 700,
     width: '90%',
-    padding: 10,
+    padding: 15,
+    backgroundColor: 'transparent',
+    marginTop: 20,
   },
   paragraph: {
     fontSize: 16,
     letterSpacing: 1,
     fontFamily: 'Poppins-Regular', // Use the loaded font
-    color: 'gray',
+    color: 'white',
   },
 });
 
